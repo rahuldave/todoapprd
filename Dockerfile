@@ -7,5 +7,4 @@ RUN pixi install
 
 
 
-EXPOSE 5000
 CMD ["pixi", "run", "server"]
