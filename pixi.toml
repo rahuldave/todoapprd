@@ -7,8 +7,10 @@ channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-server = "python app.py"
+server = "gunicorn -w 4 -b0.0.0.0:5000 app:app"
 
 [dependencies]
 flask = ">=3.0.3,<3.1"
 flask-sqlalchemy = ">=3.0.3,<3.1"
+gunicorn = ">=22.0.0,<22.1"
+python-dotenv = ">=1.0.1,<1.1"

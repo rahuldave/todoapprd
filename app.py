@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import dotenv_values
 
+config = dotenv_values(".env")
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = config['DATABASE_URI']
+DEBUG = True if (config['DEBUG'] == 'True') else False
 db = SQLAlchemy(app)
 
 class Category(db.Model):
@@ -54,4 +58,4 @@ def toggle_todo(todo_id):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=DEBUG)
