@@ -1,16 +1,17 @@
 [project]
 name = "todoapprd"
-version = "0.1.0"
-description = "Add a short description here"
-authors = ["Rahul Dave <rahuldave@gmail.com>"]
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-server = "gunicorn -w 4 -b0.0.0.0:5000 app:app"
+populate = "python -m todoapp.sql"                  # runs stuff in name==__main__
+server = "gunicorn -w 4 -b0.0.0.0:5000 todoapp:app"
+devserver = "python -m todoapp.app"                 # runs stuff in name==__main__
 
 [dependencies]
 flask = ">=3.0.3,<3.1"
-flask-sqlalchemy = ">=3.0.3,<3.1"
 gunicorn = ">=22.0.0,<22.1"
 python-dotenv = ">=1.0.1,<1.1"
+
+[pypi-dependencies]
+todoapprd = { path = ".", editable = true }

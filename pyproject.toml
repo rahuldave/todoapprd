@@ -1,0 +1,20 @@
+[project]
+name = "todoapprd"
+version = "0.1.0"
+description = "Add a short description here"
+authors = [{ name = "Rahul Dave", email = "rahuldave@gmail.com" }]
+
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools]
+packages = ["todoapp"]
+package-dir = { "" = "." }
+
+
+[tool.pyright]
+venvPath = "."
+venv = ".pixi/envs/default"
