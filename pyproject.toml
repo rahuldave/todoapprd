@@ -17,4 +17,45 @@ package-dir = { "" = "." }
 
 [tool.pyright]
 venvPath = "."
-venv = ".pixi/envs/default"
+venv = ".pixi/envs/dev"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    "W",
+    # pyflakes
+    "F",
+    # McCabe
+    "C",
+    # Bugbear
+    "B",
+    # isort
+    "I",
+    # bandit
+    "S",
+    # mypy
+    "ANN",
+]
+
+ignore = [
+    # bandit
+    "S101",   # dont warn on asserts
+    "E203",   # dont complain about whitespace before :
+    "ANN401",
+]
+
+mccabe.max-complexity = 10
+
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = true
+ignore-fully-untyped = true
+
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = ["requests", "pytest"]
+ignore_missing_imports = true
