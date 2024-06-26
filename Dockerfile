@@ -6,8 +6,8 @@ COPY . /app
 RUN pixi install
 
 # to make this work on doccu you need:
-# 1. ssh dokku storage:ensure-directory todoapprd
-# 2. ssh dokku storage:mount todoapprd /var/lib/dokku/data/storage/todoapprd:/app/storage
+# 1. `ssh dokku storage:ensure-directory --chown root todoapprd`
+# 2. `ssh dokku storage:mount todoapprd /var/lib/dokku/data/storage/todoapprd:/app/storage`
 # One can set env variables with dokku see "dokku config set" but i do it here for simplicity
 # one may also set this variable in /app/storage/.env file. See config.py for more info.
 
@@ -22,4 +22,6 @@ ENV DATABASE_FILE = /app/storage/todos.db
 # this command automatically sets the env var ENV to "prod". So we
 # dont need to set it in here.
 # ENV ENV=prod
-CMD ["pixi", "run", "server"]
+#
+RUN
+CMD pixi run populate; pixi run server
