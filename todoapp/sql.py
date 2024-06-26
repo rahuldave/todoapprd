@@ -1,19 +1,20 @@
 import sqlite3
+from sqlite3 import Connection
 
 from dotenv import dotenv_values
 
 
-def get_db(dbfile):
+def get_db(dbfile: str) -> Connection:
     db = sqlite3.connect(dbfile)
     db.row_factory = sqlite3.Row
     return db
 
 
-def unget_db(db):
+def unget_db(db: Connection) -> None:
     db.close()
 
 
-def create_db(dbfile):
+def create_db(dbfile: str) -> Connection:
     db = get_db(dbfile)
     db.execute("""
         CREATE TABLE IF NOT EXISTS categories (
@@ -36,4 +37,7 @@ def create_db(dbfile):
 
 if __name__ == "__main__":
     config = dotenv_values(".env")
-    create_db(config["DATABASE_FILE"])
+    if config:
+        dbfile = config["DATABASE_FILE"]
+        if dbfile:
+            create_db(dbfile)

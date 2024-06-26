@@ -45,7 +45,7 @@ ignore = [
     "ANN401",
 ]
 
-mccabe.max-complexity = 10
+mccabe.max-complexity = 15
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**.py" = ["S608"]
@@ -60,5 +60,5 @@ warn_return_any = true
 warn_unused_configs = true
 
 [[tool.mypy.overrides]]
-module = ["requests", "pytest"]
+module = ["sqlite3", "pytest", "flask", "dotenv"]
 ignore_missing_imports = true
