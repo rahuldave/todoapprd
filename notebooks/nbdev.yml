@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "todoapp"
+  site-url: "https://rahuldave.github.io/todoapprd"
+  description: "A Todo App with a Flask API backend and a Alpine.js frontend."
+  repo-branch: main
+  repo-url: "https://github.com/rahuldave/todoapprd"

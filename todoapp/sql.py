@@ -1,20 +1,23 @@
 import sqlite3
 from sqlite3 import Connection
 
-from dotenv import dotenv_values
+from todoapp.config import get_configs
 
 
 def get_db(dbfile: str) -> Connection:
+    "Get a connection to the database"
     db = sqlite3.connect(dbfile)
     db.row_factory = sqlite3.Row
     return db
 
 
 def unget_db(db: Connection) -> None:
+    "Close the connection to the database"
     db.close()
 
 
 def create_db(dbfile: str) -> Connection:
+    "Get a connection to the database and create the tables"
     db = get_db(dbfile)
     db.execute("""
         CREATE TABLE IF NOT EXISTS categories (
@@ -36,7 +39,7 @@ def create_db(dbfile: str) -> Connection:
 
 
 if __name__ == "__main__":
-    config = dotenv_values(".env")
+    config = get_configs()
     if config:
         dbfile = config["DATABASE_FILE"]
         if dbfile:

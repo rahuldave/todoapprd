@@ -1,36 +1,42 @@
 from sqlite3 import Connection
 from typing import Optional, Tuple, Union
 
-from dotenv import dotenv_values
 from flask import Flask, Response, jsonify, render_template, request
 from pydantic import BaseModel, ValidationError
 
+from todoapp.config import get_configs
 from todoapp.sql import get_db, unget_db
 
 
 class CategoryIncoming(BaseModel):
-    "A Category Dataclass"
+    "A Category Dataclass for incoming data to POST requests"
 
     name: str  # the title of the wikipedia page
 
 
 class TodoIncoming(BaseModel):
-    "A Todo Dataclass"
+    "A Todo Dataclass for incoming data to POST requests"
 
     task: str  # the text of the task
     category_id: int  # the category ID of the task
 
 
 def open_db(app: Flask) -> Connection:
+    "Open a connection to the database and store it in the app object"
     if "db" not in app.config:
         db = get_db(app.config["DATABASE_FILE"])
         app.config["db"] = db
         return db
-    return app.config["db"]
+    else:
+        if isinstance(app.config["db"], Connection):
+            return app.config["db"]
+        else:
+            raise TypeError("Expected app.config['db'] to be a Connection")
 
 
 def create_app() -> Flask:
-    config = dotenv_values(".env")
+    "Create a Flask app with the configuration from the .env file and set up the routes"
+    config = get_configs()
     app = Flask(__name__, template_folder=config["TEMPLATE_FOLDER"])
     app.config["EXPLAIN_TEMPLATE_LOADING"] = True
     app.config["DEBUG"] = True if (config["DEBUG"] == "True") else False
@@ -38,10 +44,12 @@ def create_app() -> Flask:
 
     @app.route("/")
     def index() -> str:
+        "Render the index page"
         return render_template("todos.html")
 
     @app.route("/todos", methods=["GET", "POST"])
     def manage_todos() -> Union[Response, Tuple[Response, int]]:
+        "Manage the todos in the database, both GET and POST methods are supported"
         conn = open_db(app)
         if request.method == "POST":
             data = request.json
@@ -65,6 +73,7 @@ def create_app() -> Flask:
 
     @app.route("/categories", methods=["GET", "POST"])
     def manage_categories() -> Union[Response, Tuple[Response, int]]:
+        "Manage the categories in the database, both GET and POST methods are supported"
         conn = open_db(app)
         if request.method == "POST":
             data = request.json
@@ -84,6 +93,7 @@ def create_app() -> Flask:
 
     @app.route("/toggle-todo/<int:todo_id>", methods=["POST"])
     def toggle_todo(todo_id: int) -> Tuple[Response, int]:
+        "Toggle the done status of a todo item in the database"
         conn = open_db(app)
         todo = conn.execute("SELECT * FROM todos WHERE id = ?", (todo_id,)).fetchone()
         done = not todo["done"]
@@ -93,6 +103,7 @@ def create_app() -> Flask:
 
     @app.teardown_appcontext
     def close_db(e: Optional[BaseException] = None) -> None:
+        "Close the database connection when the app context is torn down"
         db = app.config.pop("db", None)
         if db is not None:
             unget_db(db)
