@@ -29,6 +29,10 @@ test_e2e = "pytest --cov -m 'e2e'"
 ruff = ">=0.4.10,<0.5"
 pre-commit = ">=3.1.1,<3.2"
 
+[feature.lintformat.tasks]
+lint = "ruff check"
+format = "ruff format"
+
 [feature.typing.dependencies]
 mypy = ">=1.10.0,<1.11"
 
