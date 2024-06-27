@@ -55,7 +55,7 @@ nbdev = "*"
 build = ">=0.7.0,<0.8"
 twine = ">=3.3.0,<3.4"
 
-[tool.pixi.feature.build.tasks]
+[feature.build.tasks]
 build = "python -m build"
 publish = "python -m twine upload --repository testpypi dist/*"
 
