@@ -8,6 +8,11 @@ RUN pixi install
 # to make this work on doccu you need:
 # 1. `ssh dokku storage:ensure-directory todoapprd`
 # 2. `ssh dokku storage:mount todoapprd /var/lib/dokku/data/storage/todoapprd:/app/storage`
+#
+# Or you can also do:
+# 1. `ssh docker "mkdir todoapprd_mount"`..this runs as your user on the host machine
+# 2. Create your screts files etc in `todoapprd_mount` folder
+# 3. `ssh dokku storage:mount todoapprd /home/your_user/todoapprd_mount:/app/storage`
 # One can set env variables with dokku see "dokku config set" but i do it here for simplicity
 # one may also set this variable in /app/storage/.env file. See config.py for more info.
 
