@@ -3,7 +3,7 @@ project:
 
 website:
   title: "todoapp"
-  site-url: "https://rahuldave.github.io/todoapp"
+  site-url: "https://rahuldave.github.io/todoapprd"
   description: "Get Random Wikipedia Pages"
   repo-branch: main
-  repo-url: "https://github.com/rahuldave/todoapp"
+  repo-url: "https://github.com/rahuldave/todoapprd"

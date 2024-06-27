@@ -1,1 +1,1 @@
-Sitemap: https://rahuldave.github.io/todoapp/sitemap.xml
+Sitemap: https://rahuldave.github.io/todoapprd/sitemap.xml
