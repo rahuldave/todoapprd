@@ -36,5 +36,4 @@ def get_configs() -> Dict[str, Optional[str]]:
         # override ALL loaded values with environment variables
         **os.environ,
     }
-    print(config)
     return config

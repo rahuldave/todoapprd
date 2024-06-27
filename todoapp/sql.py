@@ -42,6 +42,5 @@ if __name__ == "__main__":
     config = get_configs()
     if config:
         dbfile = config["DATABASE_FILE"]
-        print("Creating database...", dbfile)
         if dbfile:
             create_db(dbfile)
