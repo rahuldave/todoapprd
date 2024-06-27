@@ -3,7 +3,7 @@ project:
 
 website:
   title: "todoapp"
-  site-url: "https://rahuldave.github.io/todoapprd"
-  description: "A Todo App with a Flask API backend and a Alpine.js frontend."
+  site-url: "https://rahuldave.github.io/todoapp"
+  description: "Get Random Wikipedia Pages"
   repo-branch: main
-  repo-url: "https://github.com/rahuldave/todoapprd"
+  repo-url: "https://github.com/rahuldave/todoapp"

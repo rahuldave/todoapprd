@@ -42,12 +42,14 @@ typing = "mypy ."
 
 [feature.docs.dependencies]
 quarto = ">=1.4.550,<1.5"
-nbdev = ">=2.2.10,<2.3"
 jupyter = ">=1.0.0,<1.1"
 
 [feature.docs.tasks]
 docs = "mkdir -p docs; cd notebooks; nbdev_docs; cp  -r _docs/* ../docs/; cd .."
 writedocs = "mkdir -p docs; cd notebooks; jupyter notebook .; cd .."
+
+[feature.docs.pypi-dependencies]
+nbdev = "*"
 
 [feature.build.dependencies]
 build = ">=0.7.0,<0.8"

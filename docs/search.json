@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Todoapp Docs",
+    "section": "",
+    "text": "Welcome to the documentation for Todoapp! We are so glad you here.",
+    "crumbs": [
+      "Todoapp Docs"
+    ]
+  },
+  {
+    "objectID": "app.html",
+    "href": "app.html",
+    "title": "todoapp",
+    "section": "",
+    "text": "from todoapp.app import CategoryIncoming, TodoIncoming, open_db, create_app\n\n\n\nfrom nbdev import show_doc\n\n\n\nCategoryIncoming\n\n CategoryIncoming (name:str)\n\nA Category Dataclass for incoming data to POST requests\n\n\n\nTodoIncoming\n\n TodoIncoming (task:str, category_id:int)\n\nA Todo Dataclass for incoming data to POST requests\n\n\n\nopen_db\n\n open_db (app:flask.app.Flask)\n\nOpen a connection to the database and store it in the app object\n\n\n\ncreate_app\n\n create_app ()\n\nCreate a Flask app with the configuration from the .env file and set up the routes",
+    "crumbs": [
+      "app.html"
+    ]
+  },
+  {
+    "objectID": "sql.html",
+    "href": "sql.html",
+    "title": "todoapp",
+    "section": "",
+    "text": "from todoapp.sql import get_db, unget_db, create_db\n\n\n\nfrom nbdev import show_doc\n\n\n\nget_db\n\n get_db (dbfile:str)\n\nGet a connection to the database\n\n\n\nunget_db\n\n unget_db (db:sqlite3.Connection)\n\nClose the connection to the database\n\n\n\ncreate_db\n\n create_db (dbfile:str)\n\nGet a connection to the database and create the tables",
+    "crumbs": [
+      "sql.html"
+    ]
+  }
+]
